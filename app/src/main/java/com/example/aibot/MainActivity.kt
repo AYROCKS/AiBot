@@ -1,7 +1,10 @@
 package com.example.aibot
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.TextWatcher
 import android.view.View
@@ -84,13 +87,15 @@ class MainActivity : AppCompatActivity() {
             if (prompt.isNotEmpty()) {
                 viewModel.generatePrompt(prompt)
 
-            } else if (prompt.isNotEmpty() && selectedImage != null) {
+            } else if (selectedImage != null) {
 
-
+                val uri = uriToBitmap(selectedImage!!)
+                viewModel.generatePrompt(prompt = prompt, image = uri!!)
             }
 
             textView.text = null
             image.setImageResource(0)
+            image.visibility = View.GONE
             selectedImage = null
             recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
 
@@ -99,5 +104,16 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun uriToBitmap(uri: Uri): Bitmap? {
+        return try {
+            // Decode the Uri into a Bitmap
+            val inputStream = contentResolver.openInputStream(uri)
+            BitmapFactory.decodeStream(inputStream)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 }

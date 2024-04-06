@@ -31,6 +31,7 @@ class GeminiAdapter : RecyclerView.Adapter<GeminiAdapter.ViewHolder>() {
         val textView : TextView = view.findViewById(R.id.RtextView)
         val userText : TextView = view.findViewById(R.id.RcurrentUser)
         val image : ImageView = view.findViewById(R.id.RimageView)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GeminiAdapter.ViewHolder {
@@ -45,8 +46,11 @@ class GeminiAdapter : RecyclerView.Adapter<GeminiAdapter.ViewHolder>() {
 
         holder.textView.text = diffValue.prompt
         holder.userText.text = if(diffValue.isUser) "You" else "ChatBot"
-        holder.image.setImageBitmap(diffValue.image)
 
+        if(diffValue.image != null){
+            holder.image.setImageBitmap(diffValue.image)
+            holder.image.visibility = View.VISIBLE
+        }
     }
 
     override fun getItemCount(): Int {
