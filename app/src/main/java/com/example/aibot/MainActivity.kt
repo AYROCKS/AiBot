@@ -68,6 +68,8 @@ class MainActivity : AppCompatActivity() {
         viewModel.generatedResponse.observe(this) {
 
             adapter.differ.submitList(it)
+
+            button.isClickable = true
         }
 
         addImage.setOnClickListener {
@@ -84,10 +86,10 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
 
             val prompt = textView.text.toString()
-            if (prompt.isNotEmpty()) {
+            if (prompt.isNotEmpty() && selectedImage == null) {
                 viewModel.generatePrompt(prompt)
-
-            } else if (selectedImage != null) {
+            }
+            else if(selectedImage != null) {
 
                 val uri = uriToBitmap(selectedImage!!)
                 viewModel.generatePrompt(prompt = prompt, image = uri!!)
@@ -101,6 +103,8 @@ class MainActivity : AppCompatActivity() {
 
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(textView.windowToken, 0)
+
+            button.isClickable = false
         }
 
 

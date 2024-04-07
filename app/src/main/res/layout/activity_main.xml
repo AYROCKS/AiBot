@@ -69,17 +69,20 @@
 
         <ImageButton
             android:id="@+id/addImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_gravity="center"
+            android:background="@color/white"
+            android:layout_marginRight="4dp"
             app:srcCompat="@drawable/baseline_image_24"
             tools:layout_editor_absoluteX="346dp" />
 
         <ImageButton
             android:id="@+id/enterButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:layout_gravity="center"
+            android:background="@color/white"
             app:srcCompat="@drawable/baseline_send_24"
             tools:layout_editor_absoluteX="346dp" />
 
